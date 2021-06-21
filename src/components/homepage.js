@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import moon from '../../src/icon-moon.svg'
 import sun from '../../src/icon-sun.svg'
+import axios from 'axios'
 export const Homepage = ()=>{
     const [lightMode, setLightMode]=useState(false)
+    const [allCountries, setAllCountries]=useState([]);
     const changeMode=()=>{
         if(lightMode){
             setLightMode(false)
@@ -14,6 +17,12 @@ export const Homepage = ()=>{
     }
     useEffect(()=>{
         setLightMode(false)
+        axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
+            if(res.status===200){
+                console.log(res)
+                setAllCountries(res.data)
+            }
+        })
     },[])
     return (<div className="container" >
         <div className={lightMode?' row header-light':' row header-dark'} >
@@ -37,6 +46,22 @@ export const Homepage = ()=>{
                 </Dropdown.Menu>
             </Dropdown>
         </div>
-        <div className="grid"></div>
+        <div className="grid">
+            {(allCountries && allCountries.length!==0 && allCountries.map((country)=>(
+                <Card className="ml-3 mb-3 mt-2" style={{width:'16rem',display:"inline-flex"}}>
+                    <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
+                    <Card.Body>
+                        <Card.Text>
+                            <div >
+                                <div>{country.name}</div>
+                                <div>Population: {country.population}</div>
+                                <div>Region: {country.region}</div>
+                                <div>Capital: {country.capital}</div>
+                            </div>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            )))}
+        </div>
     </div>)
 }
