@@ -1,9 +1,11 @@
 body{
-  background-color: hsl(209, 23%, 22%);
+  background-color: hsl(207, 26%, 17%);
+  font-family: 'Nunito Sans', sans-serif;
 }
 .header-dark{
-  background-color: hsl(207, 26%, 17%);
+  background-color: hsl(209, 23%, 22%);
   color:white;
+  
 }
 .header-light{
   background-color: white;
@@ -13,6 +15,14 @@ body{
   margin:0px
 }
 .dark-input{
-  background-color:  hsl(207, 26%, 17%);
+  background-color:  hsl(209, 23%, 22%);
   border: none
+}
+.card-body-dark{
+  background-color:  hsl(209, 23%, 22%);
+  border: none;
+  color:white;
+}
+.card-head{
+  font-size: 22px;
 }
