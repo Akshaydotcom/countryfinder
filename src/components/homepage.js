@@ -42,6 +42,10 @@ export const Homepage = ()=>{
         }
     }
 
+    const openCountryDetails = (countryName)=>{
+        
+    }
+
     return (<div className="container" >
         <div className={lightMode?' row header-light':' row header-dark'} >
         <h5 className="col-lg-10 col-md-10 col-sm-5 col-7">Where in the world?</h5>
@@ -67,7 +71,7 @@ export const Homepage = ()=>{
         </div>
         <div className="grid">
             {(allCountries && allCountries.length!==0 && allCountries.map((country)=>(
-                <Card className="ml-3 mb-3 mt-2 card-body-dark" style={{width:'16rem',display:"inline-flex"}}>
+                <Card className="ml-3 mb-3 mt-2 card-body-dark" style={{width:'16rem',display:"inline-flex"}} onClick={()=>openCountryDetails(country.name)}>
                     <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
                     <Card.Body>
                         <Card.Text>
