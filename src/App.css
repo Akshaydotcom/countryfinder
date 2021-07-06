@@ -26,3 +26,9 @@ body{
 .card-head{
   font-size: 22px;
 }
+.countryDetails{
+  color:white
+}
+.countryDetailImage{
+  height: 300px;
+}

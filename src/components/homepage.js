@@ -2,24 +2,15 @@ import React, {useEffect, useState} from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Card from 'react-bootstrap/Card'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import moon from '../../src/icon-moon.svg'
-import sun from '../../src/icon-sun.svg'
+
 import axios from 'axios'
-export const Homepage = ()=>{
-    const [lightMode, setLightMode]=useState(false)
+export const Homepage = (props)=>{
+    
     const [allCountries, setAllCountries]=useState([]);
-    const changeMode=()=>{
-        if(lightMode){
-            setLightMode(false)
-        }else{
-            setLightMode(true)
-        }
-    }
+   
     useEffect(()=>{
-        setLightMode(false)
         axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
             if(res.status===200){
-                console.log(res)
                 setAllCountries(res.data)
             }
         })
@@ -35,24 +26,20 @@ export const Homepage = ()=>{
         else{
             axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
             if(res.status===200){
-                console.log(res)
                 setAllCountries(res.data)
             }
         })
         }
     }
 
-    const openCountryDetails = (countryName)=>{
-        
-    }
 
     return (<div className="container" >
-        <div className={lightMode?' row header-light':' row header-dark'} >
+        {/* <div className={lightMode?' row header-light':' row header-dark'} >
         <h5 className="col-lg-10 col-md-10 col-sm-5 col-7">Where in the world?</h5>
             <span onClick={changeMode}>
                 {!lightMode?<img src={moon} alt="dark mode" />:<img src={sun} alt="dark mode" />}Dark Mode
             </span>
-        </div>
+        </div> */}
         <div className="row pt-5">
             <div className="col-lg-10 col-md-10 col-sm-5 col-7">
                 <input type="text" placeholder="Search for a country" className="dark-input"/>
@@ -71,7 +58,7 @@ export const Homepage = ()=>{
         </div>
         <div className="grid">
             {(allCountries && allCountries.length!==0 && allCountries.map((country)=>(
-                <Card className="ml-3 mb-3 mt-2 card-body-dark" style={{width:'16rem',display:"inline-flex"}} onClick={()=>openCountryDetails(country.name)}>
+                <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
                     <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
                     <Card.Body>
                         <Card.Text>
