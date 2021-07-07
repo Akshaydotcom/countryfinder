@@ -27,7 +27,7 @@ function App() {
                 {darkMode?<img src={moon} alt="dark mode" />:<img src={sun} alt="dark mode" />}Dark Mode
             </span>
         </div>
-      {/* <Country countryName={'india'} /> */}
+      {country&&<Country countryName={'india'} />}
       <Homepage getCountryName={getCountryName} getMode={getMode}/>
       
     </div>
