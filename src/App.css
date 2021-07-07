@@ -16,7 +16,8 @@ body{
 }
 .dark-input{
   background-color:  hsl(209, 23%, 22%);
-  border: none
+  border: none;
+  color:white
 }
 .card-body-dark{
   background-color:  hsl(209, 23%, 22%);

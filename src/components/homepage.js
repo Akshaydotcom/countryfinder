@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, {useEffect, useState} from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Card from 'react-bootstrap/Card'
@@ -5,9 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import axios from 'axios'
 export const Homepage = (props)=>{
-    
+    const searchInput=React.createRef()
     const [allCountries, setAllCountries]=useState([]);
-   
+    let [searchValue, setSearchValue]=useState('')
+    let [searchResults, setSearchResults]=useState({})
     useEffect(()=>{
         axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
             if(res.status===200){
@@ -32,17 +34,23 @@ export const Homepage = (props)=>{
         }
     }
 
+    const searchCountry=()=>{
+        searchValue=searchInput.current.value.toLowerCase();
+        setSearchValue(searchValue)
+    }
+
+    React.useEffect(()=>{
+        allCountries.map((country)=>{
+            if(country.name.toLowerCase()===searchValue){
+               setSearchResults(country)
+            }
+        })
+    },[searchValue, allCountries])
 
     return (<div className="container" >
-        {/* <div className={lightMode?' row header-light':' row header-dark'} >
-        <h5 className="col-lg-10 col-md-10 col-sm-5 col-7">Where in the world?</h5>
-            <span onClick={changeMode}>
-                {!lightMode?<img src={moon} alt="dark mode" />:<img src={sun} alt="dark mode" />}Dark Mode
-            </span>
-        </div> */}
         <div className="row pt-5">
             <div className="col-lg-10 col-md-10 col-sm-5 col-7">
-                <input type="text" placeholder="Search for a country" className="dark-input"/>
+                <input type="text" placeholder="Search for a country" className="dark-input" ref={searchInput} onChange={searchCountry}/>
             </div>
             <Dropdown className="dark-dropdown">
                 <Dropdown.Toggle>Filter by Region</Dropdown.Toggle>
@@ -57,8 +65,9 @@ export const Homepage = (props)=>{
             </Dropdown>
         </div>
         <div className="grid">
-            {(allCountries && allCountries.length!==0 && allCountries.map((country)=>(
-                <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
+            {!searchValue?
+            (allCountries && allCountries.length!==0 && allCountries.map((country)=>(
+                    <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
                     <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
                     <Card.Body>
                         <Card.Text>
@@ -71,7 +80,21 @@ export const Homepage = (props)=>{
                         </Card.Text>
                     </Card.Body>
                 </Card>
-            )))}
+            ))):(searchResults && searchResults.length!==0 && <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(searchResults.name)}>
+            <Card.Img variant="top" src={searchResults.flag} style={{height:'170px'}}></Card.Img>
+            <Card.Body>
+                <Card.Text>
+                    <div >
+                        <div className="card-head">{searchResults.name}</div>
+                        <div>Population: {searchResults.population}</div>
+                        <div>Region: {searchResults.region}</div>
+                        <div>Capital: {searchResults.capital}</div>
+                    </div>
+                </Card.Text>
+            </Card.Body>
+        </Card>)
+        }
+            
         </div>
     </div>)
 }
