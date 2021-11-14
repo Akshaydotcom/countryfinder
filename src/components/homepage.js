@@ -11,7 +11,7 @@ export const Homepage = (props)=>{
     let [searchValue, setSearchValue]=useState('')
     let [searchResults, setSearchResults]=useState({})
     useEffect(()=>{
-        axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
+        axios.get('https://restcountries.com/v2/all').then(res=>{
             if(res.status===200){
                 setAllCountries(res.data)
             }
@@ -20,13 +20,13 @@ export const Homepage = (props)=>{
 
     const filterByRegion=(e)=>{
         if(e.target.text.toLowerCase()!=='all'){
-        axios.get('https://restcountries.eu/rest/v2/region/'+e.target.text.toLowerCase()).then(res=>{
+        axios.get('https://restcountries.com/v2/region/'+e.target.text.toLowerCase()).then(res=>{
             if(res.status===200){
                 setAllCountries(res.data)
             }
         })}
         else{
-            axios.get('https://restcountries.eu/rest/v2/all').then(res=>{
+            axios.get('https://restcountries.com/v2/all').then(res=>{
             if(res.status===200){
                 setAllCountries(res.data)
             }

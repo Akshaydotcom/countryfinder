@@ -7,7 +7,7 @@ export const Country = props =>{
     const [borderCodes, setBorderCodes]=React.useState([])
     React.useEffect(()=>{
         
-        axios.get('https://restcountries.eu/rest/v2/name/'+props.countryName+'?fullText=true').then(res=>{
+        axios.get('https://restcountries.com/v2/name/'+props.countryName+'?fullText=true').then(res=>{
             if(res.status===200){
                 setCountryDetails(res.data)
                 console.log(res.data[0].borders)
@@ -23,7 +23,7 @@ export const Country = props =>{
             borderCodes.forEach(border => {
                 codes=codes+border+";"
             });
-            axios.get('https://restcountries.eu/rest/v2/alpha?codes='+codes+'fields=name').then(res=>{
+            axios.get('https://restcountries.com/v2/alpha?codes='+codes+'fields=name').then(res=>{
                 if(res.status===200){
                     setBorderCountries(res.data)
                 }
