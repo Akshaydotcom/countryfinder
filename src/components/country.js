@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import React from 'react'
+import './country.css';
 import axios from 'axios'
 export const Country = props =>{
     const [countryDetails, setCountryDetails]=React.useState([])
@@ -10,7 +11,6 @@ export const Country = props =>{
         axios.get('https://restcountries.com/v2/name/'+props.countryName+'?fullText=true').then(res=>{
             if(res.status===200){
                 setCountryDetails(res.data)
-                console.log(res.data[0].borders)
                 setBorderCodes(res.data[0].borders)
             }
         })
@@ -18,7 +18,7 @@ export const Country = props =>{
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     React.useEffect(()=>{
-        if(borderCodes.length>0){
+        if(borderCodes?.length>0){
             let codes=''
             borderCodes.forEach(border => {
                 codes=codes+border+";"

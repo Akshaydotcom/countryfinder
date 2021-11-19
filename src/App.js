@@ -3,13 +3,13 @@ import React from 'react'
 import moon from '../src/icon-moon.svg'
 import sun from '../src/icon-sun.svg'
 import { Country } from './components/country';
+import { NewWindow } from './components/NewWindow';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 function App() {
   const [darkMode, setDarkMode]=React.useState(true);
   const [country, setCountry]=React.useState('');
   const getCountryName = (CName)=>{
-    console.log(CName)
     setCountry(CName.toLowerCase())
   }
   const getMode=(mode)=>{
@@ -27,7 +27,7 @@ function App() {
                 {darkMode?<img src={moon} alt="dark mode" />:<img src={sun} alt="dark mode" />}Dark Mode
             </span>
         </div>
-      {country&&<Country countryName={'india'} />}
+      {country&&<NewWindow><Country countryName={country} /></NewWindow>}
       <Homepage getCountryName={getCountryName} getMode={getMode}/>
       
     </div>
