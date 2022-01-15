@@ -2,10 +2,12 @@ body{
   background-color: hsl(207, 26%, 17%);
   font-family: 'Nunito Sans', sans-serif;
 }
+.body-light{
+  background-color: white;
+}
 .header-dark{
   background-color: hsl(209, 23%, 22%);
   color:white;
-  
 }
 .header-light{
   background-color: white;

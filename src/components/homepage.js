@@ -47,7 +47,7 @@ export const Homepage = (props)=>{
         })
     },[searchValue, allCountries])
 
-    return (<div className="container" >
+    return (<div className={props.darkMode?"container-fluid":"container-fluid body-light"} >
         <div className="row pt-5">
             <div className="col-lg-10 col-md-10 col-sm-5 col-7">
                 <input type="text" placeholder="Search for a country" className="dark-input" ref={searchInput} onChange={searchCountry}/>
@@ -67,7 +67,7 @@ export const Homepage = (props)=>{
         <div className="grid">
             {!searchValue?
             (allCountries && allCountries.length!==0 && allCountries.map((country)=>(
-                    <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
+                    <Card className="mr-4 ml-4 mb-3 mt-3 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
                     <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
                     <Card.Body>
                         <Card.Text>

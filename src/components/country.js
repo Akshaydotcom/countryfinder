@@ -7,8 +7,7 @@ export const Country = props =>{
     const [borderCountries, setBorderCountries]=React.useState([])
     const [borderCodes, setBorderCodes]=React.useState([])
     React.useEffect(()=>{
-        
-        axios.get('https://restcountries.com/v2/name/'+props.countryName+'?fullText=true').then(res=>{
+        axios.get('https://restcountries.com/v2/name/'+props.props.countryName+'?fullText=true').then(res=>{
             if(res.status===200){
                 setCountryDetails(res.data)
                 setBorderCodes(res.data[0].borders)
@@ -30,11 +29,13 @@ export const Country = props =>{
             })
         }
     },[countryDetails, borderCodes])
-
+    const changeCountry = (countryName) =>{
+        props.props.getCountryName(countryName);
+    }
     return(
-        <div className="countryDetails"> 
+        <div className="countryDetails" style={{}}> 
             {countryDetails.length!==0 && <div className="container row">
-            <img className="countryDetailImage col" src={countryDetails[0].flag} alt="flag"/>
+            <img className="countryDetailImage col" src={countryDetails[0]&&countryDetails[0].flag} alt="flag" style={{height: '300px'}}/>
             <div className="col">
                 <h5>{countryDetails[0].name}</h5>
                 <div className="row">
@@ -53,13 +54,18 @@ export const Country = props =>{
                         })}
                     </div>
                 </div>
+                <div className="col">
                 <div className="row">
-                        Border Country:<div className="col-lg-9 col-md-9 col-sm-4"> {borderCountries.map((bCountry)=>{
+               Border Country:<div className="col-lg-9 col-md-9 col-sm-4"> {borderCountries.map((bCountry)=>{
                             if(bCountry!==null){
-                                return <button type="button"class="btn btn-secondary mr-2 mb-2">{bCountry.name}</button>
+                                return <span>{bCountry.name}</span>
                                         
                             }
                         })}
+                        <div>
+                        <button type="button"class="btn btn-secondary mr-2 mb-2" onClick={()=>changeCountry("")}>Close</button>
+                        </div>
+                        </div>
                         </div>
                 </div>
             </div>

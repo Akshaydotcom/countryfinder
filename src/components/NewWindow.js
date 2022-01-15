@@ -1,26 +1,22 @@
-import {useState, useEffect, useRef} from 'react'
-import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
+import ReactDom from 'react-dom';
+import { Country } from './country';
+const modalRoot = document.getElementById('modal-root')
 export const NewWindow = (props) => {
-    const [container, setContainer] = useState(null);
-    const newWindow = useRef(window);
-  
-    useEffect(() => {
-      const div = document.createElement("div");
-      setContainer(div);
-    }, []);
-  
-    useEffect(() => {
-      if (container) {
-        newWindow.current = window.open(
-          "",
-          "",
-          "width=600,height=600,left=200,top=200"
-        );
-        newWindow.current.document.body.appendChild(container);
-        const curWindow = newWindow.current;
-        return () => curWindow.close();
-      }
-    }, [container]);
-  
-    return container && createPortal(props.children, container);
+  const [countryName, setCountryName]=useState(props.countryName)
+  console.log(countryName)
+  useEffect(()=>{
+    setCountryName(props.countryName)
+  },[props.countryName])
+    return ReactDom.createPortal(<div style={{
+      position: "absolute",
+      top: "0",
+      bottom: "0",
+      left: "0",
+      right: "0",
+      display: "grid",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(15, 15, 15, 0.8)"
+    }}><Country  props={props}/></div>,modalRoot)
   };
