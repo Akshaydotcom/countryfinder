@@ -50,7 +50,7 @@ export const Homepage = (props)=>{
     return (<div className={props.darkMode?"container-fluid":"container-fluid body-light"} >
         <div className="row pt-5">
             <div className="col-lg-10 col-md-10 col-sm-5 col-7">
-                <input type="text" placeholder="Search for a country" className="dark-input" ref={searchInput} onChange={searchCountry}/>
+                <input type="text" placeholder="Search for a country" className={props.darkMode?"dark-input":"light-input"} ref={searchInput} onChange={searchCountry} style={{marginLeft:"3rem"}}/>
             </div>
             <Dropdown className="dark-dropdown">
                 <Dropdown.Toggle>Filter by Region</Dropdown.Toggle>
@@ -67,8 +67,9 @@ export const Homepage = (props)=>{
         <div className="grid">
             {!searchValue?
             (allCountries && allCountries.length!==0 && allCountries.map((country)=>(
-                    <Card className="mr-4 ml-4 mb-3 mt-3 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(country.name)}>
-                    <Card.Img variant="top" src={country.flag} style={{height:'170px'}}></Card.Img>
+                    <Card className={props.darkMode?"mr-3 ml-3 mb-3 mt-3 card-body-dark":"mr-3 ml-3 mb-3 mt-3 card-body-light"} style={{width:'15rem',display:"inline-flex",  
+                    boxShadow:"0px 5px 15px 5px rgba(0,0,0,0.23)"}} onClick={()=>props.getCountryName(country.name)}>
+                    <Card.Img variant="top" src={country.flag} style={{height:'158px'}}></Card.Img>
                     <Card.Body>
                         <Card.Text>
                             <div >
@@ -80,8 +81,8 @@ export const Homepage = (props)=>{
                         </Card.Text>
                     </Card.Body>
                 </Card>
-            ))):(searchResults && searchResults.length!==0 && <Card className="mr-3 mb-3 mt-2 card-body-dark" style={{width:'15rem',display:"inline-flex"}} onClick={()=>props.getCountryName(searchResults.name)}>
-            <Card.Img variant="top" src={searchResults.flag} style={{height:'170px'}}></Card.Img>
+            ))):(searchResults && searchResults.length!==0 && <Card className={props.darkMode?"mr-3 mb-3 mt-2 card-body-dark":"mr-3 mb-3 mt-2 card-body-light"} style={{width:'15rem',display:"inline-flex",boxShadow:"0px 5px 15px 5px rgba(0,0,0,0.23)"}} onClick={()=>props.getCountryName(searchResults.name)}>
+            <Card.Img  variant="top" src={searchResults.flag} style={{height:'158px'}}></Card.Img>
             <Card.Body>
                 <Card.Text>
                     <div >

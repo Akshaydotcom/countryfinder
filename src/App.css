@@ -19,12 +19,26 @@ body{
 .dark-input{
   background-color:  hsl(209, 23%, 22%);
   border: none;
-  color:white
+  color:white;
+  background: url("/src/search-3-24.ico") no-repeat 1px 1px;
+  padding-left:30px;
+}
+.light-input{
+  background-color:  white;
+  border: 1px solid #1c1c1c;
+  color:hsl(209, 23%, 22%);
+  background: url("https://img.icons8.com/material-outlined/24/000000/search--v2.png") no-repeat 1px 1px;
+  padding-left:30px
 }
 .card-body-dark{
   background-color:  hsl(209, 23%, 22%);
   border: none;
   color:white;
+}
+.card-body-light{
+  background-color:  white;
+  border: none;
+  color:sl(209, 23%, 22%);
 }
 .card-head{
   font-size: 22px;

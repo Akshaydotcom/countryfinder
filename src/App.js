@@ -19,7 +19,7 @@ function App() {
     else setDarkMode(true)
   }
   return (
-    <div className="App container-fluid">
+    <div className={darkMode?"App container-fluid":"App container-fluid body-light"}>
       <div className={!darkMode?' row header-light':' row header-dark'} >
         <h5 className="col-lg-10 col-md-10 col-sm-5 col-7">Where in the world?</h5>
             <span onClick={changeMode}>
