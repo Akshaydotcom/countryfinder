@@ -49,3 +49,6 @@ body{
 .countryDetailImage{
   height: 300px;
 }
+.space-even{
+  justify-content: space-evenly;
+}

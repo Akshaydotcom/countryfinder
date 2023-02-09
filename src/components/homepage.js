@@ -48,9 +48,9 @@ export const Homepage = (props)=>{
     },[searchValue, allCountries])
 
     return (<div className={props.darkMode?"container-fluid":"container-fluid body-light"} >
-        <div className="row pt-5">
+        <div className="space-even row pt-5">
             <div className="col-lg-10 col-md-10 col-sm-5 col-7">
-                <input type="text" placeholder="Search for a country" className={props.darkMode?"dark-input":"light-input"} ref={searchInput} onChange={searchCountry} style={{marginLeft:"3rem"}}/>
+                <input type="text" placeholder="Search for a country" className={props.darkMode?"dark-input":"light-input"} ref={searchInput} onChange={searchCountry}/>
             </div>
             <Dropdown className="dark-dropdown">
                 <Dropdown.Toggle>Filter by Region</Dropdown.Toggle>
